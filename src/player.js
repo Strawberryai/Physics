@@ -47,6 +47,7 @@ class Player{
             pop();
 
             isOfScreen(index, object ,this.player, pos.x, pos.y);
+            
         }
         
     }

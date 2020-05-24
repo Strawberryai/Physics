@@ -69,17 +69,35 @@ function unRender(physics){
 
 function inventoryRenderer(){
                 //Inventory ["box"]
-
+                
                 translate(-translation[0], -translation[1]);
                 noStroke();
                 fill(20);
                 text('Inventory', 15, 90);
 
-                for (var j=0; j< columSlots; j++){
-                    for(var k=0; k< rowSlots; k++){
+                for (var j=0; j< rowSlots; j++){
+                    for(var k=0; k< columSlots; k++){
                         rectMode(CORNER);
+                        
+
+                        //This is so BADDDDDDDD
+                        //SHITTI CODEEEEEEEEEEEEEEEEEEEE
+                        //This is wrong I know but is temporary
+                        //This only works with 5 colums and 3 rows
+                        //we have to find the metod to fit the mouse position with the squares
+                        
+                        if(15 < mousePosition[0] && mousePosition[0] < 50 * columSlots + 15 && 100 < mousePosition[1] && mousePosition[1] < 50 * rowSlots + 100){
+                            mouseXpos= Math.trunc(map(mousePosition[0]/columSlots, 3, 50, 0, columSlots));
+                            mouseYpos = Math.trunc(map(mousePosition[1]/rowSlots, 30, 80, 0, rowSlots));
+
+                            if(k == mouseXpos && j == mouseYpos) fill('#0099b3');
+                            else fill(200);
+                        }
+                        else fill(200);
                         noStroke();
-                        fill(200);
+                        
+
+                        text(k * 50 +15, 50 * k +15, 50*j +100);
                         rect(50 * k +15, 50*j +100, 40, 40);
 
 
@@ -92,6 +110,10 @@ function inventoryRenderer(){
 
                 var countX=0;
                 var countY=0;
+
+                //We have to put a maximun inventeroy length
+                //I mean, you can pick infinite items now
+
                 for(var i=0; i < noRepeated.length; i++){
                     var itemQuantity= inventory.filter( inventory => inventory == noRepeated[i]).length;
 
@@ -104,8 +126,19 @@ function inventoryRenderer(){
 
                             } else console.log("image not found");
                             
+                            //This is wrong I know but is temporary
+                            //This only works with 5 colums and 3 rows
+                            //we have to find the metod to fit the mouse position with the squares
+
+                            if(15 < mousePosition[0] && mousePosition[0] < 50 * columSlots + 15 && 100 < mousePosition[1] && mousePosition[1] < 50 * rowSlots + 100){
+                                mouseXpos= Math.trunc(map(mousePosition[0]/columSlots, 3, 50, 0, columSlots));
+                                mouseYpos = Math.trunc(map(mousePosition[1]/rowSlots, 30, 80, 0, rowSlots));
+    
+                                if(countX == mouseXpos && countY == mouseYpos) itemSelected = noRepeated[i];
+                            }
+
                             countX++;
-                            if(countX >= rowSlots) countY++, countX= 0;
+                            if(countX >= rowSlots && countX) countY++, countX= 0;
                  }
 
 

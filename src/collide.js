@@ -2,8 +2,7 @@ function collide(){
 
     var playerLabel= Players[0].player.parts[1].label;
     var terrainLabel = terrain[0][0].body.label;
-    var itemLabel;
-    if(Items.length != 0) itemLabel = Items[0].body.label;
+
 
     Events.on(engine, 'collisionStart', function(event) {
         var pairs= event.pairs;
@@ -12,8 +11,8 @@ function collide(){
                 var p=pairs[i];
                 //Check if this collision is reffered to Players
                     //Only jump = true if player is on terrain or on a box[]
-                    if(p.bodyA.label == playerLabel)if(p.bodyB.label == terrainLabel || p.bodyB.label == itemLabel) jump=true;
-                    if(p.bodyB.label == playerLabel)if(p.bodyA.label == terrainLabel || p.bodyA.label == itemLabel) jump=true;
+                    if(p.bodyA.label == playerLabel)if(p.bodyB.label == terrainLabel || itemLabel.indexOf(p.bodyB.label) != -1) jump=true;
+                    if(p.bodyB.label == playerLabel)if(p.bodyA.label == terrainLabel || itemLabel.indexOf(p.bodyA.label) != -1) jump=true;
                 
             }
     });
@@ -25,8 +24,8 @@ function collide(){
                 var p=pairs[i];
                 //Check if this collision is reffered to Players
                     //Only jump = false if player isnt on terrain or on a box[] anymore
-                    if(p.bodyA.label == playerLabel)if(p.bodyB.label == terrainLabel || p.bodyB.label == itemLabel) jump=false;
-                    if(p.bodyB.label == playerLabel)if(p.bodyA.label == terrainLabel || p.bodyA.label == itemLabel) jump=false;
+                    if(p.bodyA.label == playerLabel)if(p.bodyB.label == terrainLabel || itemLabel.indexOf(p.bodyB.label) != -1) jump=false;
+                    if(p.bodyB.label == playerLabel)if(p.bodyA.label == terrainLabel || itemLabel.indexOf(p.bodyA.label) != -1) jump=false;
                     
             }
     });

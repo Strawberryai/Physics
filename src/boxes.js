@@ -9,6 +9,7 @@ class Box{
         this.body = Bodies.rectangle(x, y, this.dimensions, this.dimensions, this.bodyProperties);
         World.add(world, this.body);
         
+        if(itemLabel.indexOf(this.body.label) == -1) itemLabel.push(this.body.label);
 
         this.showBox= function(index, object){
             var pos= this.body.position;
@@ -26,7 +27,6 @@ class Box{
             else rect(0, 0, this.dimensions, this.dimensions);
             pop();
             }
-
             isOfScreen(index, object ,this.body, pos.x, pos.y);
 
         }

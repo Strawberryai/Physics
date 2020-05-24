@@ -17,6 +17,7 @@ var sprites= [];
 
 var size = 20;
 var translation = [];
+var mousePosition =[];
 var time=0;
 var day = true;
 
@@ -25,6 +26,8 @@ var toggleInventory = false;
 var Fpressed = false;
 
 var Items=[];
+var itemSelected;
+var itemLabel = [];
 var terrain= [ eath =[], dirt = [], stone = [], watter=[]];
 var Players=[];
 var range =5 * size;   //blocks
@@ -32,8 +35,8 @@ var spawnPoint=[];
 
 var inventory = [];
 var noRepeated = [];
-var rowSlots = 5;
-var columSlots = 3;
+var rowSlots = 3;
+var columSlots = 5;
 var displayInventory = [];
 
 
@@ -43,9 +46,6 @@ function preload() {
   for(var i=0; i<= 2; i++){
     sprites[i]= loadImage(spriteAdress + `${i}.png`);
   }
-  /*sprites[0]= loadImage(spriteAdress + '0.png');
-  sprites[1]= loadImage(spriteAdress + '1.png');
-  sprites[2]= loadImage(spriteAdress + '2.png');*/
 }
 
 function setup() {
@@ -68,14 +68,21 @@ function setup() {
         restitution: 0,
         mass:5,
         Render: true,
-        Pickable:false,
+        Pickable:true,
         Color: '#FF1744',
         Image:true
     })); 
 
+
 }
 
-function mouseDragged(){
+function mousePressed(){
+    mousePosition[0]= mouseX;
+    mousePosition[1]= mouseY;
+    //console.log(mousePosition[0]/columSlots);
+}
+
+/*function mouseDragged(){
 
         //x, y, size^-1 (scale), bodyProperties
         Items.push( new Box(mouseX -translation[0], mouseY - translation[1], size, {
@@ -85,14 +92,14 @@ function mouseDragged(){
             restitution: 0,
             mass:5,
             Render: true,
-            Pickable:false,
+            Pickable:true,
             Color: '#FF1744',
             Image:true
         })); 
 
 
     
-}
+}*/
 
 function keyPressed(e){
     if(e.key == 'e' && toggleInventory == true)toggleInventory= false;
@@ -104,9 +111,7 @@ function draw() {
 
     //if(toggleInventory == true)inventoryRenderer();
 
-    translate(translation[0], translation[1]);
-    render();
-    if(toggleInventory == true)inventoryRenderer();
+
 
     collide();  // Register all the collisions
 
@@ -121,12 +126,12 @@ function draw() {
     if(keyIsDown(81)) {
         Items.push( new Box(0, 0, size, {
             isStatic: false,
-            label:"0",
+            label:"2",
             friction: 0,
             restitution: 0,
             mass:5,
             Render: true,
-            Pickable:false,
+            Pickable:true,
             Color: '#FF1744',
             Image:true
         })); 
@@ -134,5 +139,9 @@ function draw() {
 
     //day: background(220);  night: background('#4e4e68');
 
+    translate(translation[0], translation[1]);
+    render();
+    if(toggleInventory == true)inventoryRenderer();
+    
     Engine.update(engine);
 }
