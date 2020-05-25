@@ -46,7 +46,7 @@ function preload() {
 
 
     for(var i=0; i<= 2; i++){
-        sprites[i]= loadImage(Adress + 'sprites' + `/${i}.png`);
+        sprites[i]= loadImage(Adress + 'images/sprites' + `/${i}.png`);
     }
 }
 
