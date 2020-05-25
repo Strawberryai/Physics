@@ -9,7 +9,8 @@ var Engine = Matter.Engine,
 var engine;
 var world;
 
-var spriteAdress = 'http://192.168.56.1:3000/sprites/';
+//var Adress = 'http://192.168.56.1:3000/sprites/';     //localhost
+var Adress = 'https://aliolixx.github.io/Physics/';   //GitHub repository
 var myFont;
 var pickaxe1;
 var sprites= [];
@@ -41,12 +42,11 @@ var displayInventory = [];
 
 function preload() {
    
-    myFont = loadFont('http://192.168.56.1:3000/fonts/Roboto-Regular.ttf');  //localhost
-    //myFont = loadFont('http://192.168.56.1:3000/fonts/Roboto-Regular.ttf');  //GitHub repository
+    myFont = loadFont(Adress + 'fonts/Roboto-Regular.ttf');
 
 
     for(var i=0; i<= 2; i++){
-        sprites[i]= loadImage(spriteAdress + `${i}.png`);
+        sprites[i]= loadImage(Adress + 'sprites' + `/${i}.png`);
     }
 }
 
