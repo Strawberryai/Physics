@@ -40,11 +40,14 @@ var displayInventory = [];
 
 
 function preload() {
-  myFont = loadFont('http://192.168.56.1:3000/fonts/Roboto-Regular.ttf');
+   
+    myFont = loadFont('http://192.168.56.1:3000/fonts/Roboto-Regular.ttf');  //localhost
+    //myFont = loadFont('http://192.168.56.1:3000/fonts/Roboto-Regular.ttf');  //GitHub repository
 
-  for(var i=0; i<= 2; i++){
-    sprites[i]= loadImage(spriteAdress + `${i}.png`);
-  }
+
+    for(var i=0; i<= 2; i++){
+        sprites[i]= loadImage(spriteAdress + `${i}.png`);
+    }
 }
 
 function setup() {

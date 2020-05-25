@@ -4,4 +4,4 @@
  I know there are a lot of errors and I made a shitty code but I'm learning.
  
  
- ![screenshot0](/server/images/screenshots/0.png)
+ ![screenshot0](images/screenshots/0.png)
