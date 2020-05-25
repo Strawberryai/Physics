@@ -61,6 +61,9 @@ function isOfScreen(index, object, physics ,xpos, ypos){
     //The objects return to screen
     else if(dist(Players[0].player.position.x, Players[0].player.position.y, xpos, ypos) < width + 100 && world.bodies.indexOf(physics) == -1) physics.Render = true, World.add(world, physics);
     }
+
+    //render player life
+    
 }
 
 function unRender(physics){

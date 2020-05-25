@@ -11,7 +11,6 @@ class Player{
             label:"playerBody",
             restitution: 0.1,
             mass: 10,
-            Pickable: false
         }
 
         var playerBody = Bodies.rectangle(this.x, this.y, this.dimensions, this.dimensions, playerProperties);
