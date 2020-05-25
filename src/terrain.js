@@ -2,6 +2,7 @@
 function GenerateTerrain(Xsize,startY, endY, stoneDepth,dimensions, watterArea, watterQuantity, watterDimensions){
     
     spawnPoint[0]= Math.trunc(map(random(), 0, 1, -Xsize, Xsize)) * dimensions;
+    noiseSeed(seed);
 
     for(var i=-Xsize; i<Xsize; i++){
         

@@ -16,10 +16,9 @@ var sprites= [];
 
 
 var size = 20;
+var seed;
 var translation = [];
 var mousePosition =[];
-var time=0;
-var day = true;
 
 var jump = false;
 var toggleInventory = false;
@@ -56,6 +55,7 @@ function setup() {
     createCanvas(600, 600);
     colorMode(RGB);
 
+    seed = Date.time;
 
     GenerateTerrain( 40 ,50, height, 10, size, 3, 10, size);     //Xstart (blocks num), Ystart (pixels), Yend (pixels), stoneDepth (blocks),dimensions (pixels), watterArea (num), watterQuantity (num), watterDimensions (pixels)
     Players.push(new Player(undefined, undefined, size));                       //x, y, dimensions; if corrdinates are not defined we set a random spawnPoint
@@ -73,35 +73,32 @@ function setup() {
         Image:true
     })); 
 
+    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, {
+        isStatic: false,
+        label:"2",
+        friction: 0,
+        restitution: 0,
+        mass:5,
+        Render: true,
+        Pickable:true,
+        Color: '#FF1744',
+        Image:true
+    })); 
+
 
 }
 
 function mousePressed(){
     mousePosition[0]= mouseX;
     mousePosition[1]= mouseY;
-    //console.log(mousePosition[0]/columSlots);
 }
 
-/*function mouseDragged(){
-
-        //x, y, size^-1 (scale), bodyProperties
-        Items.push( new Box(mouseX -translation[0], mouseY - translation[1], size, {
-            isStatic: false,
-            label:"2",
-            friction: 0,
-            restitution: 0,
-            mass:5,
-            Render: true,
-            Pickable:true,
-            Color: '#FF1744',
-            Image:true
-        })); 
-
-
-    
-}*/
+function mouseDragged(){   
+}
 
 function keyPressed(e){
+    if(isNaN(e.key) == false && e.key != ' ' && e.key <= noRepeated.length) itemSelected = noRepeated[e.key -1];
+
     if(e.key == 'e' && toggleInventory == true)toggleInventory= false;
     else if(e.key == 'e' && toggleInventory == false)toggleInventory= true;
 }
@@ -109,35 +106,15 @@ function keyPressed(e){
 function draw() {
     background(220);    
 
-    //if(toggleInventory == true)inventoryRenderer();
-
-
-
-    collide();  // Register all the collisions
+    Players[0].collide();  // Register all the collisions with player
 
     if(keyIsDown(65))Players[0].move(-1, 0);
             
     if(keyIsDown(68))Players[0].move(1, 0);
     
     if(keyIsDown(32) && jump)Players[0].move(0, -1);
-
-    //if(keyIsDown(70) && jump)Fpressed = true;
     
-    if(keyIsDown(81)) {
-        Items.push( new Box(0, 0, size, {
-            isStatic: false,
-            label:"2",
-            friction: 0,
-            restitution: 0,
-            mass:5,
-            Render: true,
-            Pickable:true,
-            Color: '#FF1744',
-            Image:true
-        })); 
-    };
-
-    //day: background(220);  night: background('#4e4e68');
+    if(keyIsDown(81)) Players[0].throwItem();
 
     translate(translation[0], translation[1]);
     render();

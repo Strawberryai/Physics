@@ -49,6 +49,81 @@ class Player{
             isOfScreen(index, object ,this.player, pos.x, pos.y);
             
         }
+
+        this.collide = function(){
+            var playerLabel= this.player.parts[1].label;
+            var terrainLabel = terrain[0][0].body.label;
+        
+        
+            Events.on(engine, 'collisionStart', function(event) {
+                var pairs= event.pairs;
+        
+                    for(var i=0; i<pairs.length; i++){
+                        var p=pairs[i];
+                        //Check if this collision is reffered to Players
+                            //Only jump = true if player is on terrain or on a box[]
+                            if(p.bodyA.label == playerLabel)if(p.bodyB.label == terrainLabel || itemLabel.indexOf(p.bodyB.label) != -1) jump=true;
+                            if(p.bodyB.label == playerLabel)if(p.bodyA.label == terrainLabel || itemLabel.indexOf(p.bodyA.label) != -1) jump=true;
+                        
+                    }
+            });
+        
+            Events.on(engine, 'collisionEnd', function(event) {
+                var pairs= event.pairs;
+                
+                    for(var i=0; i<pairs.length; i++){
+                        var p=pairs[i];
+                        //Check if this collision is reffered to Players
+                            //Only jump = false if player isnt on terrain or on a box[] anymore
+                            if(p.bodyA.label == playerLabel)if(p.bodyB.label == terrainLabel || itemLabel.indexOf(p.bodyB.label) != -1) jump=false;
+                            if(p.bodyB.label == playerLabel)if(p.bodyA.label == terrainLabel || itemLabel.indexOf(p.bodyA.label) != -1) jump=false;
+                            
+                    }
+            });
+        
+            //get items ===> items pickable
+        
+                for(var i=0; i< Items.length; i++){
+                    if(Items[i].body.Pickable){
+                        
+                        this.playerX = this.player.parts[1].position.x;
+                        this.playerY = this.player.parts[1].position.y;
+                        this.objectY = Items[i].body.position.y;
+                        this.objectX = Items[i].body.position.x;
+        
+                        if(Math.abs(this.playerX - this.objectX ) < size+1 && Math.abs(this.playerY - this.objectY) < size+1 && noRepeated.length < rowSlots * columSlots){
+                            this.pickItem(i);
+                        }
+                    }
+                    
+                }
+        
+        }
+
+        this.pickItem = function(index){
+            unRender(Items[index].body);
+            inventory.push(Items[index].body.label);
+            Items.splice(index, 1);
+        }
+
+        this.throwItem = function(){
+            if(itemSelected != undefined && inventory.indexOf(itemSelected) != -1){
+                Items.push( new Box(map(Math.random(), 0, 1, this.player.parts[1].position.x  - size * 3, this.player.parts[1].position.x  + size * 3), this.player.parts[1].position.y -size *2, size, {
+                    isStatic: false,
+                    label: itemSelected,
+                    friction: 0,
+                    restitution: 0,
+                    mass:5,
+                    Render: true,
+                    Pickable:true,
+                    Color: '#FF1744',
+                    Image:true
+                })); 
+        
+                inventory.splice(inventory.indexOf(itemSelected), 1);
+        
+            }
+        }
         
     }
 }
