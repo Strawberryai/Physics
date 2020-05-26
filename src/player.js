@@ -18,6 +18,7 @@ class Player{
         this.player = Body.create({
             parts: [playerBody]
         });
+        
         World.add(world, this.player);
         
         this.move = function(xdir, ydir){

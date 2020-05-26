@@ -7,7 +7,7 @@ function render(){
         textSize(32);
         text('Controls', 10, 30);
         textSize(16);
-        text('Dragg the mouse to create boxes', 15, 50);
+        text('Q to throw items', 15, 50);
         text('Space to jump / A to go left / D to go right / E to open your inventory', 15, 65);
 
 

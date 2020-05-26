@@ -97,6 +97,7 @@ function mousePressed(){
 }
 
 function mouseDragged(){   
+    //Players[0].throwItem();
 }
 
 function keyPressed(e){
