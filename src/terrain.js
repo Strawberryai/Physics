@@ -66,7 +66,7 @@ function GenerateTerrain(Xsize,startY, endY, stoneDepth,dimensions){
             
     
         //Generate Trees
-        if ( noise(i) > 0.7)terrain[4].push(new Tree (xpos, ypos, size, 5*size));
+        if ( noise(i) > 0.7)terrain[4].push(new Tree (xpos, ypos, size, Math.trunc(map(noise(i *100), 0, 1, 3, 8))*size));
 
         //Generate Water
         if(noise(i*0.5) > 0.75){

@@ -12,12 +12,11 @@ var world;
 //var Adress = 'http://192.168.56.1:3000/sprites/';     //localhost
 var Adress = 'https://aliolixx.github.io/Physics/';   //GitHub repository
 var myFont;
-var pickaxe1;
 var sprites= [];
 
 
 var size = 20;
-var seed;
+var seed = 12345678;
 var translation = [];
 var mousePosition =[];
 
@@ -29,7 +28,9 @@ var Items=[];
 var itemSelected;
 var itemLabel = [];
 var terrain= [ eath =[], dirt = [], stone = [], watter=[], trees=[]];
+
 var Players=[];
+var gameOver = false;
 var PlayersMaxHealth =100;
 var range =5 * size;   //blocks
 var spawnPoint=[];
@@ -44,8 +45,6 @@ var displayInventory = [];
 function preload() {
    
     myFont = loadFont(Adress + 'fonts/Roboto-Regular.ttf');
-
-
     for(var i=0; i<= 2; i++){
         sprites[i]= loadImage(Adress + 'images/sprites' + `/${i}.png`);
     }
@@ -110,8 +109,15 @@ function keyPressed(e){
 }
 
 function draw() {
-    background(220);    
+    background(220);
+
+    if(gameOver == true) GameOver();
+    else Engine.update(engine);
+
     Players[0].collide();  // Register all the collisions with player 0
+
+    translate(translation[0], translation[1]);
+    render();
 
     if(keyIsDown(65))Players[0].move(-1, 0);
             
@@ -121,9 +127,7 @@ function draw() {
     
     if(keyIsDown(81)) Players[0].throwItem();
 
-    translate(translation[0], translation[1]);
-    render();
-    if(toggleInventory == true)inventoryRenderer();
-    
-    Engine.update(engine);
+    //if(toggleInventory == true)inventoryRenderer();
+    inventoryRenderer();
+
 }

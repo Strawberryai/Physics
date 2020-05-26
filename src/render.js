@@ -151,3 +151,14 @@ function inventoryRenderer(){
                 
 
 }
+
+function GameOver(){
+    //Instructions
+    fill(20);
+    noStroke();
+    textFont(myFont);
+    textSize(32);
+    text('Game Over', 10, 30);
+    textSize(16);
+    text('Reload the page to continue', 15, 50);
+}

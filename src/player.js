@@ -49,11 +49,11 @@ class Player{
             rect(0, 0, this.dimensions, this.dimensions);
             pop();
 
+            //check player health and change his color
+            if(this.player.parts[1].Life <= 0) gameOver = true;
+            this.player.parts[1].Color = lerpColor(color('#000'), color('#00ff75'), map(this.player.parts[1].Life, 0, PlayersMaxHealth, 0, 1));
             //check what is out of the screen
             isOfScreen(index, object ,this.player, pos.x, pos.y);
-            
-            //check player health and change his color
-            this.player.parts[1].Color = lerpColor(color('#000'), color('#00ff75'), map(this.player.parts[1].Life, 0, PlayersMaxHealth, 0, 1));
         }
 
         this.collide = function(){
