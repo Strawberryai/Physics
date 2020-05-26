@@ -28,7 +28,7 @@ var Fpressed = false;
 var Items=[];
 var itemSelected;
 var itemLabel = [];
-var terrain= [ eath =[], dirt = [], stone = [], watter=[]];
+var terrain= [ eath =[], dirt = [], stone = [], watter=[], trees=[]];
 var Players=[];
 var PlayersMaxHealth =100;
 var range =5 * size;   //blocks
@@ -59,9 +59,9 @@ function setup() {
     createCanvas(600, 600);
     colorMode(RGB);
 
-    seed = Date.time;
+    if(seed == undefined) date = new Date(), seed = date.getTime();
 
-    GenerateTerrain( 40 ,50, height, 10, size, 3, 10, size);     //Xstart (blocks num), Ystart (pixels), Yend (pixels), stoneDepth (blocks),dimensions (pixels), watterArea (num), watterQuantity (num), watterDimensions (pixels)
+    GenerateTerrain( 100 ,height-300, height, 10, size);     //Xstart (blocks num), Ystart (pixels), Yend (pixels), stoneDepth (blocks),dimensions (pixels)
     Players.push(new Player(undefined, undefined, size));                       //x, y, dimensions; if corrdinates are not defined we set a random spawnPoint
     
     //Add a pickaxe
@@ -99,6 +99,7 @@ function mousePressed(){
 
 function mouseDragged(){   
     //Players[0].throwItem();
+    Players[0].player.parts[1].Life--;
 }
 
 function keyPressed(e){
@@ -124,6 +125,5 @@ function draw() {
     render();
     if(toggleInventory == true)inventoryRenderer();
     
-    //Players[0].player.parts[1].Life--;
     Engine.update(engine);
 }

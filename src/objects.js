@@ -8,6 +8,7 @@ class Box{
         
         this.body = Bodies.rectangle(x, y, this.dimensions, this.dimensions, this.bodyProperties);
         World.add(world, this.body);
+
         
         if(itemLabel.indexOf(this.body.label) == -1) itemLabel.push(this.body.label);
 
@@ -47,5 +48,32 @@ class Box{
             }
         }
         
+    }
+}
+
+class Tree{
+    constructor(x, y, Width, Height){
+        this.x = x;
+        this. y = y;
+        this.Width = Width;
+        this.Height = Height;
+
+        this.showTree = function(){
+            push();
+
+            rectMode(CENTER);
+            imageMode(CENTER);
+            noStroke();
+            fill('#914025');
+
+            translate(this.x, this.y);
+
+            //if(this.bodyProperties.Image) image(this.image, 0, 0, this.dimensions, this.dimensions);
+            rect(0, -this.Height/2, this.Width, this.Height);
+            fill('#27e804');
+            rect(0, -this.Height, this.Width * 3, this.Width*3);
+            pop();
+            
+        }
     }
 }

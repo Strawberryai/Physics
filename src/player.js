@@ -53,7 +53,7 @@ class Player{
             isOfScreen(index, object ,this.player, pos.x, pos.y);
             
             //check player health and change his color
-            this.player.parts[1].Color = lerpColor(color('#17750e'), color('#00ff75'), map(this.player.parts[1].Life, 0, PlayersMaxHealth, 0, 1));
+            this.player.parts[1].Color = lerpColor(color('#000'), color('#00ff75'), map(this.player.parts[1].Life, 0, PlayersMaxHealth, 0, 1));
         }
 
         this.collide = function(){
