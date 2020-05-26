@@ -16,13 +16,12 @@ var sprites= [];
 
 
 var size = 20;
-var seed = 12345678;
+var seed;
 var translation = [];
 var mousePosition =[];
 
 var jump = false;
-var toggleInventory = false;
-var Fpressed = false;
+var toggleInventory = true;
 
 var Items=[];
 var itemSelected;
@@ -98,7 +97,7 @@ function mousePressed(){
 
 function mouseDragged(){   
     //Players[0].throwItem();
-    Players[0].player.parts[1].Life--;
+    //Players[0].player.parts[1].Life--;
 }
 
 function keyPressed(e){
@@ -127,7 +126,7 @@ function draw() {
     
     if(keyIsDown(81)) Players[0].throwItem();
 
-    //if(toggleInventory == true)inventoryRenderer();
-    inventoryRenderer();
+    if(toggleInventory == true)inventoryRenderer();
+    //inventoryRenderer();
 
 }
