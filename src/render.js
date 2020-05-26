@@ -126,9 +126,17 @@ function inventoryRenderer(){
  
 
                             countX++;
-                            if(countX >= rowSlots && countX) countY++, countX= 0;
+                            if(countX >= columSlots && countX) countY++, countX= 0;
                  }
-
-
+                //Life bar
+                rectMode(CORNER);
+                noStroke();
+                fill(Players[0].player.parts[1].Color);
+                rect(45, 50 * rowSlots + 80, map(Players[0].player.parts[1].Life, 0, PlayersMaxHealth, 0,  40 * (columSlots + 1)), 20);
+                noFill();
+                stroke(0);
+                strokeWeight(1);
+                rect(45, 50 * rowSlots + 80, 40 * (columSlots + 1), 20);
+                
 
 }

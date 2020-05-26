@@ -11,7 +11,10 @@ class Player{
             label:"playerBody",
             restitution: 0.1,
             mass: 10,
+            Life:PlayersMaxHealth,
+            Color: ''
         }
+        // '#69F0AE'
 
         var playerBody = Bodies.rectangle(this.x, this.y, this.dimensions, this.dimensions, playerProperties);
 
@@ -37,7 +40,7 @@ class Player{
 
             push();
             noStroke();
-            fill('#69F0AE');
+            fill(this.player.parts[1].Color);
             rectMode(CENTER);
             translate(pos.x, pos.y);
             translation[0] = width/2 - pos.x;
@@ -46,8 +49,11 @@ class Player{
             rect(0, 0, this.dimensions, this.dimensions);
             pop();
 
+            //check what is out of the screen
             isOfScreen(index, object ,this.player, pos.x, pos.y);
             
+            //check player health and change his color
+            this.player.parts[1].Color = lerpColor(color('#17750e'), color('#00ff75'), map(this.player.parts[1].Life, 0, PlayersMaxHealth, 0, 1));
         }
 
         this.collide = function(){

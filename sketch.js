@@ -30,12 +30,13 @@ var itemSelected;
 var itemLabel = [];
 var terrain= [ eath =[], dirt = [], stone = [], watter=[]];
 var Players=[];
+var PlayersMaxHealth =100;
 var range =5 * size;   //blocks
 var spawnPoint=[];
 
 var inventory = [];
 var noRepeated = [];
-var rowSlots = 3;
+var rowSlots = 1;
 var columSlots = 5;
 var displayInventory = [];
 
@@ -109,8 +110,7 @@ function keyPressed(e){
 
 function draw() {
     background(220);    
-
-    Players[0].collide();  // Register all the collisions with player
+    Players[0].collide();  // Register all the collisions with player 0
 
     if(keyIsDown(65))Players[0].move(-1, 0);
             
@@ -124,5 +124,6 @@ function draw() {
     render();
     if(toggleInventory == true)inventoryRenderer();
     
+    //Players[0].player.parts[1].Life--;
     Engine.update(engine);
 }
