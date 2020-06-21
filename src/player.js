@@ -1,8 +1,12 @@
 class Player{
-    constructor(x, y, dimensions){
+    constructor(spawnPointX, spawnPointY, dimensions){
         
-        if(x == undefined || y == undefined) this.x = spawnPoint[0], this.y = spawnPoint[1];
-        else this.x = x, this.y = y;
+        //Set the SpawnPoint                    
+        if(spawnPointX == undefined || spawnPointY == undefined) {
+            spawnPoint[0]= spawnPointX = Math.trunc(map(noise(1), 0, 1, 0, Xsize)) * dimensions;
+            spawnPoint[1] = spawnPointY = 100;
+        }
+        this.x = spawnPointX, this.y = spawnPointY;
 
         this.dimensions = dimensions;
 
@@ -129,6 +133,12 @@ class Player{
                 inventory.splice(inventory.indexOf(itemSelected), 1);
         
             }
+        }
+
+        this.useItem = function(item){
+            //It's much better to make a JSON file with all the properties of all items
+
+            if(item == "1") mine(1, A);
         }
         
     }

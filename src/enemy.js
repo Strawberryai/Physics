@@ -1,7 +1,6 @@
 class Enemy{
     constructor(x, y, dimensions){
         
-
         this.x = x;
         this.y = y;
         this.dimensions = dimensions;
@@ -49,7 +48,7 @@ class Enemy{
         }
 
         this.collide = function(){
-            var playerLabel= this.player.parts[1].label;
+            /*var playerLabel= this.player.parts[1].label;
             var terrainLabel = terrain[0][0].body.label;
         
         
@@ -77,7 +76,7 @@ class Enemy{
                             if(p.bodyB.label == playerLabel)if(p.bodyA.label == terrainLabel || itemLabel.indexOf(p.bodyA.label) != -1) jump=false;
                             
                     }
-            });
+            });*/
         }
 
     }

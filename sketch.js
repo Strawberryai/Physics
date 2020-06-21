@@ -16,9 +16,10 @@ var sprites= [];
 
 
 var size = 20;
-var seed;
+var Xsize = 100;
+var seed = 12345678;
 var translation = [];
-var mousePosition =[];
+var mousePosition = [];
 
 var jump = false;
 var toggleInventory = true;
@@ -31,8 +32,11 @@ var terrain= [ eath =[], dirt = [], stone = [], watter=[], trees=[]];
 var Players=[];
 var gameOver = false;
 var PlayersMaxHealth =100;
-var range =5 * size;   //blocks
+var range =5 * size;   //blocks that wil be rendered (physics
+var renderDepht= 2* 1080;
 var spawnPoint=[];
+
+var Enemies=[];
 
 var inventory = [];
 var noRepeated = [];
@@ -42,7 +46,8 @@ var displayInventory = [];
 
 
 function preload() {
-   
+    if(seed == undefined) date = new Date(), seed = date.getTime();
+
     myFont = loadFont(Adress + 'fonts/Roboto-Regular.ttf');
     for(var i=0; i<= 2; i++){
         sprites[i]= loadImage(Adress + 'images/sprites' + `/${i}.png`);
@@ -57,11 +62,12 @@ function setup() {
     createCanvas(600, 600);
     colorMode(RGB);
 
-    if(seed == undefined) date = new Date(), seed = date.getTime();
-
-    GenerateTerrain( 100 ,height-300, height, 10, size);     //Xstart (blocks num), Ystart (pixels), Yend (pixels), stoneDepth (blocks),dimensions (pixels)
-    Players.push(new Player(undefined, undefined, size));                       //x, y, dimensions; if corrdinates are not defined we set a random spawnPoint
+    Players.push(new Player(spawnPoint[0], spawnPoint[1], size));   //x, y, dimensions; if corrdinates are not defined we set a random spawnPoint
+    GenerateTerrain( Xsize ,height-300, height, 10, size);          //Xsize (blocks num), Ystart (pixels), Yend (pixels), stoneDepht (blocks),dimensions (pixels)
     
+    
+
+
     //Add a pickaxe
     Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, {
         isStatic: false,
@@ -93,6 +99,9 @@ function setup() {
 function mousePressed(){
     mousePosition[0]= mouseX;
     mousePosition[1]= mouseY;
+
+    if(itemSelected && inventory.indexOf(itemSelected) != -1) Player[0].useItem(itemSelected);
+
 }
 
 function mouseDragged(){   
@@ -128,5 +137,6 @@ function draw() {
 
     if(toggleInventory == true)inventoryRenderer();
     //inventoryRenderer();
+
 
 }

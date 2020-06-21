@@ -2,13 +2,9 @@
 function GenerateTerrain(Xsize,startY, endY, stoneDepth,dimensions){
     noiseSeed(seed);
 
-    for(var i=0; i<Xsize; i++){
+    for(var i= 0; i<Xsize; i++){
             var xpos = dimensions* i ;
             var ypos = Math.trunc(map(noise(i*0.05), 0, 1, startY/dimensions, endY/dimensions)) * dimensions;
-
-            //Set the SpawnPoint
-            spawnPoint[0]= Math.trunc(map(noise(1), 0, 1, 0, Xsize)) * dimensions;
-            if(xpos == spawnPoint[0]) spawnPoint[1] = ypos - 100;
            
             //Generate Grass
             terrain[0].push(new Box(xpos, ypos, dimensions, {

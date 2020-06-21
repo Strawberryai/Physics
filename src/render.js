@@ -40,7 +40,7 @@ function render(){
 
 function isOfScreen(index, object, physics ,xpos, ypos){
     
-    if(index!= null && ypos > height + 200){
+    if(index!= null && ypos > renderDepht){
 
             unRender(physics);
             //console.log( 'Removed',object[i]);
