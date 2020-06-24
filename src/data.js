@@ -10,8 +10,8 @@ var data ={
             jumpable: true,
             placeable: true,
             Pickable: false,
-            Color: '#FFC107',
-            Image: true
+            Color: '#07ff39',
+            Image: false
         },
         "2": {  //Dirt
             isStatic: true,
@@ -23,8 +23,8 @@ var data ={
             jumpable: true,
             Render: true,
             Pickable: false,
-            Color: '#FF8F00',
-            Image: true
+            Color: '#FFC107',
+            Image: false
         },
         "3":{   //Stone
             isStatic: true,
