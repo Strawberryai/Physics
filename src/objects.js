@@ -4,13 +4,13 @@ class Box{
         this.dimensions = dimensions;
         this.bodyProperties= bodyProperties;
         //take the image
-        this.image = sprites[this.bodyProperties.label];
+        if(this.bodyProperties.Image) this.image = sprites[this.bodyProperties.label];
         
         this.body = Bodies.rectangle(x, y, this.dimensions, this.dimensions, this.bodyProperties);
         World.add(world, this.body);
 
         
-        if(itemLabel.indexOf(this.body.label) == -1) itemLabel.push(this.body.label);
+        //if(itemLabel.indexOf(this.body.label) == -1) itemLabel.push(this.body.label);
 
         this.showBox= function(index, object){
             var pos= this.body.position;
@@ -24,7 +24,7 @@ class Box{
             imageMode(CENTER);
             translate(pos.x, pos.y);
             rotate(angle);
-            if(this.bodyProperties.Image && this.image) image(this.image, 0, 0, this.dimensions, this.dimensions);
+            if(this.image) image(this.image, 0, 0, this.dimensions, this.dimensions);
             else if(this.bodyProperties.Image) image(sprites[0], 0, 0, this.dimensions, this.dimensions);
             else rect(0, 0, this.dimensions, this.dimensions);
             pop();

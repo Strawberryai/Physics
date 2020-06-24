@@ -7,7 +7,7 @@ function mine(vel, type){
         for(var j=0; j< terrain[i].length; j++){
             if(terrain[i][j].body.position.x == blockCoordinates[0] && terrain[i][j].body.position.y == blockCoordinates[1]){
                 terrain[i][j].body.Render = false ,unRender(terrain[i][j].body), terrain[i].splice(terrain[i].indexOf(terrain[i][j]), 1);
-                Items.push( new Box(blockCoordinates[0], blockCoordinates[1], size*2/3, data.blocks[terrain[i][0].body.label])), 
+                Items.push( new Box(blockCoordinates[0], blockCoordinates[1], size*2/3, data[terrain[i][0].body.label])), 
                 Items[Items.length -1].body.Pickable = true, Items[Items.length -1].body.isStatic = false;
             }
         }

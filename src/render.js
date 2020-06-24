@@ -143,12 +143,13 @@ function inventoryRenderer(){
                             if(itemSelected == noRepeated[i])noFill(), stroke('#ffc100'), strokeWeight(3), rect(50 * countX +65, 50*countY +100, 40, 40);
 
                             noStroke();
-                            if(sprites[noRepeated[i]] != undefined) image(sprites[noRepeated[i]], 50 * countX +65, 50*countY +100, 30, 30);
-                            else if( data.blocks[noRepeated[i]] != undefined){
-                                fill(data.blocks[noRepeated[i]].Color);
+                            if(data[noRepeated[i]].Image) {
+                                if(sprites[noRepeated[i]] != undefined) image(sprites[noRepeated[i]], 50 * countX +65, 50*countY +100, 30, 30);
+                                else image(sprites[0], 50 * countX +65, 50*countY +100, 30, 30);
+                            }else {
+                                fill(data[noRepeated[i]].Color);
                                 rect(50 * countX +65, 50*countY +100, 30, 30);
-                            }else image(sprites[0], 50 * countX +65, 50*countY +100, 30, 30);
-
+                            }
                             fill(20);
                             textSize(10);
                             text(itemQuantity, 50*countX + 65, 50*countY +120);

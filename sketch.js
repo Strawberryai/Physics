@@ -49,7 +49,7 @@ function preload() {
     if(seed == undefined) date = new Date(), seed = date.getTime();
 
     myFont = loadFont(Adress + 'fonts/Roboto-Regular.ttf');
-    for(var i=0; i<= 4; i++){
+    for(var i=0; i< 6; i++){
         sprites[i]= loadImage(Adress + 'images/sprites' + `/${i}.png`);
     }
 }
@@ -67,9 +67,9 @@ function setup() {
 
 
     //Add a pickaxe
-    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] +50, size, data.items.diamondPickaxe)); 
+    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] +50, size, data[4])); 
 
-    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, data.items.heart)); 
+    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, data[5])); 
 
 
 }

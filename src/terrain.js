@@ -6,7 +6,7 @@ function GenerateTerrain(Xsize,startY, endY, stoneDepth,dimensions){
             var ypos = Math.trunc(map(noise(i*0.05), 0, 1, startY/dimensions, endY/dimensions)) * dimensions;
 
             //Generate Grass
-            terrain[0].push(new Box(xpos, ypos, dimensions, data.blocks[1]));
+            terrain[0].push(new Box(xpos, ypos, dimensions, data[1]));
 
            for(var j = 0; j < stoneDepth; j++){
 
@@ -16,22 +16,15 @@ function GenerateTerrain(Xsize,startY, endY, stoneDepth,dimensions){
                 var myrandom = Math.trunc(map(noise(i * 0.05), 0, 1, 2, 3));
 
                 for(var k = 0; k< myrandom; k++){
-                terrain[2].push(new Box(xpos, (j + k) *(dimensions) + ypos + dimensions, dimensions, data.blocks[3]));}
+                terrain[2].push(new Box(xpos, (j + k) *(dimensions) + ypos + dimensions, dimensions, data[3]));}
 
                 j += myrandom;
         }
 
-                terrain[1].push(new Box(xpos, j *(dimensions) + ypos + dimensions, dimensions, data.blocks[2]));
+                terrain[1].push(new Box(xpos, j *(dimensions) + ypos + dimensions, dimensions, data[2]));
             }else{
 
-                terrain[2].push(new Box(xpos, j *(dimensions) + ypos + dimensions, dimensions, {
-                    isStatic: true,
-                    label:"terrain[2]",
-                    Render: true,
-                    Pickable: false,
-                    Color: 'gray',
-                    image: false
-                }));
+                terrain[2].push(new Box(xpos, j *(dimensions) + ypos + dimensions, dimensions, data[3]));
             }
             
             

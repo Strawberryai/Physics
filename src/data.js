@@ -1,6 +1,5 @@
 var data ={
 
-    "blocks":{
         "1": {
             isStatic: true,
             label:"1",
@@ -11,7 +10,7 @@ var data ={
             Render: true,
             Pickable: false,
             Color: '#FFC107',
-            image: false
+            Image: true
         },
         "2": {
             isStatic: true,
@@ -23,7 +22,7 @@ var data ={
             Render: true,
             Pickable: false,
             Color: '#FF8F00',
-            image: false
+            Image: true
         },
         "3":{
             isStatic: true,
@@ -35,13 +34,9 @@ var data ={
             Render: true,
             Pickable: false,
             Color: 'gray',
-            image: false
-        }
-    },
-    
-    "items":{
-
-        "diamondPickaxe":{
+            Image: true
+        },
+        "4":{
             isStatic: false,
             label:"4",
             friction: 0,
@@ -52,7 +47,7 @@ var data ={
             Color: '#FF1744',
             Image:true
         },
-        "heart":{
+        "5":{
             isStatic: false,
             label:"5",
             friction: 0,
@@ -64,5 +59,4 @@ var data ={
             Image:true
         }
 
-    }
 };
