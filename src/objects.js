@@ -24,7 +24,8 @@ class Box{
             imageMode(CENTER);
             translate(pos.x, pos.y);
             rotate(angle);
-            if(this.bodyProperties.Image) image(this.image, 0, 0, this.dimensions, this.dimensions);
+            if(this.bodyProperties.Image && this.image) image(this.image, 0, 0, this.dimensions, this.dimensions);
+            else if(this.bodyProperties.Image) image(sprites[0], 0, 0, this.dimensions, this.dimensions);
             else rect(0, 0, this.dimensions, this.dimensions);
             pop();
             }
@@ -40,7 +41,7 @@ class Box{
             var moduledir = (Math.sqrt (Math.pow (xdir, 2) + Math.pow(ydir,2 )));
 
             if(moduledir< 6*size){
-                let forceX = (0.0001 * this.body.mass) ;
+                let forceX = (0.002 * this.body.mass) ;
                 let forceY = (0.003 * this.body.mass) ;
 
                 Body.applyForce(this.body,pos ,{x: forceX * xdir/moduledir, y:forceY * ydir/moduledir});

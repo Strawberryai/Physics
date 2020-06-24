@@ -14,12 +14,12 @@ var Adress = 'https://aliolixx.github.io/Physics/';   //GitHub repository
 var myFont;
 var sprites= [];
 
-
 var size = 20;
 var Xsize = 100;
-var seed = 12345678;
+var seed;
+var grid = true;
 var translation = [];
-var mousePosition = [];
+var blockCoordinates = [];
 
 var jump = false;
 var toggleInventory = true;
@@ -64,49 +64,24 @@ function setup() {
 
     Players.push(new Player(spawnPoint[0], spawnPoint[1], size));   //x, y, dimensions; if corrdinates are not defined we set a random spawnPoint
     GenerateTerrain( Xsize ,height-300, height, 10, size);          //Xsize (blocks num), Ystart (pixels), Yend (pixels), stoneDepht (blocks),dimensions (pixels)
-    
-    
 
 
     //Add a pickaxe
-    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, {
-        isStatic: false,
-        label:"1",
-        friction: 0,
-        restitution: 0,
-        mass:5,
-        Render: true,
-        Pickable:true,
-        Color: '#FF1744',
-        Image:true
-    })); 
+    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] +50, size, data.items.diamondPickaxe)); 
 
-    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, {
-        isStatic: false,
-        label:"2",
-        friction: 0,
-        restitution: 0,
-        mass:5,
-        Render: true,
-        Pickable:true,
-        Color: '#FF1744',
-        Image:true
-    })); 
+    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, data.items.heart)); 
 
 
 }
 
 function mousePressed(){
-    mousePosition[0]= mouseX;
-    mousePosition[1]= mouseY;
 
-    if(itemSelected && inventory.indexOf(itemSelected) != -1) Player[0].useItem(itemSelected);
+    if(itemSelected && inventory.indexOf(itemSelected) != -1) Players[0].useItem(itemSelected);
 
 }
 
 function mouseDragged(){   
-    //Players[0].throwItem();
-    //Players[0].player.parts[1].Life--;
+    if(itemSelected && inventory.indexOf(itemSelected) != -1) Players[0].useItem(itemSelected);
 }
 
 function keyPressed(e){
@@ -125,7 +100,7 @@ function draw() {
     Players[0].collide();  // Register all the collisions with player 0
 
     translate(translation[0], translation[1]);
-    render();
+    render();    
 
     if(keyIsDown(65))Players[0].move(-1, 0);
             
@@ -136,7 +111,6 @@ function draw() {
     if(keyIsDown(81)) Players[0].throwItem();
 
     if(toggleInventory == true)inventoryRenderer();
-    //inventoryRenderer();
 
 
 }

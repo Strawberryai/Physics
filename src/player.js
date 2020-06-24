@@ -72,8 +72,8 @@ class Player{
                         var p=pairs[i];
                         //Check if this collision is reffered to Players
                             //Only jump = true if player is on terrain or on a box[]
-                            if(p.bodyA.label == playerLabel)if(p.bodyB.label == terrainLabel || itemLabel.indexOf(p.bodyB.label) != -1) jump=true;
-                            if(p.bodyB.label == playerLabel)if(p.bodyA.label == terrainLabel || itemLabel.indexOf(p.bodyA.label) != -1) jump=true;
+                            if(p.bodyA.label == playerLabel && p.bodyB.jumpable) jump=true;
+                            if(p.bodyB.label == playerLabel && p.bodyB.jumpable ) jump=true;
                         
                     }
             });
@@ -138,7 +138,7 @@ class Player{
         this.useItem = function(item){
             //It's much better to make a JSON file with all the properties of all items
 
-            if(item == "1") mine(1, A);
+            if(item == "4") mine(1, "A");
         }
         
     }

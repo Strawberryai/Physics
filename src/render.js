@@ -1,4 +1,17 @@
 function render(){
+        //Grid
+        if(grid){
+            push();
+            strokeWeight(0.5);
+            stroke("#fff");
+            var l=size/2;
+            while (l < Xsize * size) {
+            line(-size/2, l, Xsize * size, l);
+            line(l, -size/2, l, Xsize  * size);
+            l += size;
+            }
+            pop();
+        }
 
         //Instructions
         fill(20);
@@ -35,6 +48,15 @@ function render(){
                     if(i == 4) terrain[4][j].showTree(); //trees
             }   
         }
+
+        //BlockSelector
+        push();
+        noFill();
+        strokeWeight(3);
+        rectMode(CENTER);
+        stroke("#ffc100");
+        rect(blockCoordinates[0], blockCoordinates[1], size, size);
+        pop();
     }
 
 
@@ -106,29 +128,32 @@ function inventoryRenderer(){
 
                 for(var i=0; i < noRepeated.length; i++){
                     var itemQuantity= inventory.filter( inventory => inventory == noRepeated[i]).length;
-
+                    
                             //This is wrong I know but is temporary
                             //This only works with 5 colums and 3 rows
                             //we have to find the metod to fit the mouse position with the squares
 
-                            if(15 < mousePosition[0] && mousePosition[0] < 50 * columSlots + 15 && 100 < mousePosition[1] && mousePosition[1] < 50 * rowSlots + 100){
-                                mouseXpos= Math.trunc(map(mousePosition[0]/columSlots, 3, 50, 0, columSlots));
-                                mouseYpos = Math.trunc(map(mousePosition[1]/rowSlots, 30, 80, 0, rowSlots));
+                            if(15 < mouseX && mouseX < 50 * columSlots + 15 && 100 < mouseY && mouseY < 50 * rowSlots + 100){
+                                mouseXpos= Math.trunc(map(mouseX/columSlots, 3, 50, 0, columSlots));
+                                mouseYpos = Math.trunc(map(mouseY/rowSlots, 30, 80, 0, rowSlots));
                                 
                                 if(countX == mouseXpos && countY == mouseYpos) itemSelected = noRepeated[i];
                             }
 
-                            if(itemSelected == noRepeated[i]){noFill(), stroke('#ffc100'), strokeWeight(3), rect(50 * countX +65, 50*countY +100, 40, 40);}
+                            if(itemSelected == noRepeated[i])noFill(), stroke('#ffc100'), strokeWeight(3), rect(50 * countX +65, 50*countY +100, 40, 40);
 
-                            if(sprites[noRepeated[i]] != undefined){
+                            noStroke();
+                            if(sprites[noRepeated[i]] != undefined) image(sprites[noRepeated[i]], 50 * countX +65, 50*countY +100, 30, 30);
+                            else if( data.blocks[noRepeated[i]] != undefined){
+                                fill(data.blocks[noRepeated[i]].Color);
+                                rect(50 * countX +65, 50*countY +100, 30, 30);
+                            }else image(sprites[0], 50 * countX +65, 50*countY +100, 30, 30);
 
-                                noStroke();
-                                image(sprites[noRepeated[i]], 50 * countX +65, 50*countY +100, 30, 30);
-                                fill(20);
-                                textSize(10);
-                                text(itemQuantity, 50*countX + 65, 50*countY +120);
+                            fill(20);
+                            textSize(10);
+                            text(itemQuantity, 50*countX + 65, 50*countY +120);
 
-                            } else console.log("image not found");
+                            
                             
  
 
@@ -150,6 +175,11 @@ function inventoryRenderer(){
                 text(`${Players[0].player.parts[1].Life} / ${PlayersMaxHealth}`, 50, 50 * rowSlots + 95);
                 
 
+}
+
+function blockSelector(){
+    blockCoordinates[0] = (Math.round((mouseX- translation[0] + size/4) / size) * size ) ;
+    blockCoordinates[1] = (Math.round((mouseY- translation[1] + size/4) / size) * size) ;
 }
 
 function GameOver(){
