@@ -52,7 +52,7 @@ function preload() {
     if(seed == undefined) date = new Date(), seed = date.getTime();
 
     myFont = loadFont(Adress + 'fonts/Roboto-Regular.ttf');
-    for(var i=0; i< 6; i++){
+    for(var i=0; i< 7; i++){
         sprites[i]= loadImage(Adress + 'images/sprites' + `/${i}.png`);
     }
 }
@@ -70,9 +70,9 @@ function setup() {
 
 
     //Add a pickaxe
-    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] +50, size, data[4])); 
+    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] +50, size, data[5])); 
 
-    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, data[5])); 
+    Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, data[6])); 
 
 
 }
@@ -98,10 +98,10 @@ function draw() {
 
     if(mouseIsPressed){
         if(mouseButton == LEFT){
-            if(itemSelected && inventory.indexOf(itemSelected) != -1)  if(itemSelected == "4") mine(1, "A"); //Get velocity and type from JSON file
+            if(itemSelected && inventory.indexOf(itemSelected) != -1)  if(itemSelected == "5") mine(1, "A"); //Get velocity and type from JSON file
         }
         if(mouseButton == RIGHT){
-            if(itemSelected && inventory.indexOf(itemSelected) != -1) placeBlock(itemSelected);
+            if(itemSelected && inventory.indexOf(itemSelected) != -1 && data[itemSelected].placeable) placeBlock(itemSelected);
         }
     }
 

@@ -41,12 +41,10 @@ function render(){
         //terrain
         for(i=0; i< terrain.length; i++){
             for(j=0; j< terrain[i].length; j++){
-                    if(i == 0) terrain[0][j].showBox(j, terrain[i]);    //Grass
-                    if(i == 1) terrain[1][j].showBox(j, terrain[i]);    //Dirt
-                    if(i == 2) terrain[2][j].showBox(j, terrain[i]);    //Stone
-                    if(i == 3) terrain[3][j].showBox(j, terrain[i]);    //Water
-                    if(i == 4) terrain[4][j].showTree(); //trees
-            }   
+                    if(i == 0) terrain[0][j].showTree();         //Trees
+                    else terrain[i][j].showBox(j, terrain[i]);   //Blocks
+                    
+            } 
         }
 
         //BlockSelector

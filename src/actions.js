@@ -1,8 +1,8 @@
 function mine(vel, type){
     
 
-    //Shovel for grass and dirt (type A)
-    for(i=0; i< 2; i++){
+    //Shovel for grass(1) and dirt(2) (type A)
+    for(i=1; i<=2; i++){
         for(var j=0; j< terrain[i].length; j++){
             if(terrain[i][j].body.position.x == blockCoordinates[0] && terrain[i][j].body.position.y == blockCoordinates[1]){
                 terrain[i][j].body.Render = false ,unRender(terrain[i][j].body), terrain[i].splice(terrain[i].indexOf(terrain[i][j]), 1);
@@ -19,7 +19,6 @@ function mine(vel, type){
 }
 
 function placeBlock(item){
-
-    terrain[item -1].push( new Box(blockCoordinates[0], blockCoordinates[1], size, data[item]));
+    terrain[item].push( new Box(blockCoordinates[0], blockCoordinates[1], size, data[item]));
     inventory.splice(inventory.indexOf(item), 1);
 }

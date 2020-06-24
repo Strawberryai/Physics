@@ -6,11 +6,12 @@ var data ={
             friction: 0,
             restitution: 0,
             mass:5,
-            jumpable: true,
             Render: true,
+            jumpable: true,
+            placeable: true,
             Pickable: false,
             Color: '#FFC107',
-            Image: false
+            Image: true
         },
         "2": {  //Dirt
             isStatic: true,
@@ -18,6 +19,7 @@ var data ={
             friction: 0,
             restitution: 0,
             mass:5,
+            placeable: true,
             jumpable: true,
             Render: true,
             Pickable: false,
@@ -30,6 +32,7 @@ var data ={
             friction: 0,
             restitution: 0,
             mass:5,
+            placeable: true,
             jumpable: true,
             Render: true,
             Pickable: false,
@@ -42,6 +45,7 @@ var data ={
             friction: 0,
             restitution: 0,
             mass:0.001,
+            placeable: true,
             Render: true,
             Pickable: false,
             Color: '#26C6DA',
