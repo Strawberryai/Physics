@@ -49,7 +49,7 @@ function preload() {
     if(seed == undefined) date = new Date(), seed = date.getTime();
 
     myFont = loadFont(Adress + 'fonts/Roboto-Regular.ttf');
-    for(var i=0; i<= 2; i++){
+    for(var i=0; i<= 4; i++){
         sprites[i]= loadImage(Adress + 'images/sprites' + `/${i}.png`);
     }
 }
