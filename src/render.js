@@ -50,6 +50,7 @@ function render(){
         }
 
         //BlockSelector
+        blockSelector();
         push();
         noFill();
         strokeWeight(3);
@@ -164,8 +165,8 @@ function inventoryRenderer(){
                 //Life bar
                 rectMode(CORNER);
                 noStroke();
-                fill(Players[0].player.parts[1].Color);
-                rect(45, 50 * rowSlots + 80, map(Players[0].player.parts[1].Life, 0, PlayersMaxHealth, 0,  40 * (columSlots + 1)), 20);
+                fill(Players[0].player.Color);
+                rect(45, 50 * rowSlots + 80, map(Players[0].player.Life, 0, PlayersMaxHealth, 0,  40 * (columSlots + 1)), 20);
                 noFill();
                 stroke(0);
                 strokeWeight(1);
@@ -173,7 +174,7 @@ function inventoryRenderer(){
                 noStroke();
                 fill(0);
                 textSize(16);
-                text(`${Players[0].player.parts[1].Life} / ${PlayersMaxHealth}`, 50, 50 * rowSlots + 95);
+                text(`${Players[0].player.Life} / ${PlayersMaxHealth}`, 50, 50 * rowSlots + 95);
                 
 
 }

@@ -24,7 +24,7 @@ class Box{
             imageMode(CENTER);
             translate(pos.x, pos.y);
             rotate(angle);
-            if(this.image) image(this.image, 0, 0, this.dimensions, this.dimensions);
+            if(this.image && this.bodyProperties.Image) image(this.image, 0, 0, this.dimensions, this.dimensions);
             else if(this.bodyProperties.Image) image(sprites[0], 0, 0, this.dimensions, this.dimensions);
             else rect(0, 0, this.dimensions, this.dimensions);
             pop();

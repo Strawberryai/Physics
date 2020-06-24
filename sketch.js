@@ -44,6 +44,9 @@ var rowSlots = 1;
 var columSlots = 5;
 var displayInventory = [];
 
+document.oncontextmenu = function() {
+    return false;
+}
 
 function preload() {
     if(seed == undefined) date = new Date(), seed = date.getTime();
@@ -62,7 +65,7 @@ function setup() {
     createCanvas(600, 600);
     colorMode(RGB);
 
-    Players.push(new Player(spawnPoint[0], spawnPoint[1], size));   //x, y, dimensions; if corrdinates are not defined we set a random spawnPoint
+    Players.push(new Player(spawnPoint[0], spawnPoint[1], size - size * 0.05));   //x, y, dimensions; if corrdinates are not defined we set a random spawnPoint
     GenerateTerrain( Xsize ,height-300, height, 10, size);          //Xsize (blocks num), Ystart (pixels), Yend (pixels), stoneDepht (blocks),dimensions (pixels)
 
 
@@ -72,16 +75,6 @@ function setup() {
     Items.push( new Box(map (random(), 0, 1, spawnPoint[0]-100, spawnPoint[0]+100), spawnPoint[1] -100, size, data[5])); 
 
 
-}
-
-function mousePressed(){
-
-    if(itemSelected && inventory.indexOf(itemSelected) != -1) Players[0].useItem(itemSelected);
-
-}
-
-function mouseDragged(){   
-    if(itemSelected && inventory.indexOf(itemSelected) != -1) Players[0].useItem(itemSelected);
 }
 
 function keyPressed(e){
@@ -100,7 +93,17 @@ function draw() {
     Players[0].collide();  // Register all the collisions with player 0
 
     translate(translation[0], translation[1]);
+    
     render();    
+
+    if(mouseIsPressed){
+        if(mouseButton == LEFT){
+            if(itemSelected && inventory.indexOf(itemSelected) != -1)  if(itemSelected == "4") mine(1, "A"); //Get velocity and type from JSON file
+        }
+        if(mouseButton == RIGHT){
+            if(itemSelected && inventory.indexOf(itemSelected) != -1) placeBlock(itemSelected);
+        }
+    }
 
     if(keyIsDown(65))Players[0].move(-1, 0);
             

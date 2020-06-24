@@ -14,6 +14,7 @@ class Player{
             isStatic: false,
             label:"playerBody",
             restitution: 0.1,
+            friction:0,
             mass: 10,
             Life:PlayersMaxHealth,
             Color: ''
@@ -22,9 +23,7 @@ class Player{
 
         var playerBody = Bodies.rectangle(this.x, this.y, this.dimensions, this.dimensions, playerProperties);
 
-        this.player = Body.create({
-            parts: [playerBody]
-        });
+        this.player = playerBody;
         
         World.add(world, this.player);
         
@@ -44,7 +43,7 @@ class Player{
 
             push();
             noStroke();
-            fill(this.player.parts[1].Color);
+            fill(this.player.Color);
             rectMode(CENTER);
             translate(pos.x, pos.y);
             translation[0] = width/2 - pos.x;
@@ -54,14 +53,14 @@ class Player{
             pop();
 
             //check player health and change his color
-            if(this.player.parts[1].Life <= 0) gameOver = true;
-            this.player.parts[1].Color = lerpColor(color('#000'), color('#00ff75'), map(this.player.parts[1].Life, 0, PlayersMaxHealth, 0, 1));
+            if(this.player.Life <= 0) gameOver = true;
+            this.player.Color = lerpColor(color('#000'), color('#00ff75'), map(this.player.Life, 0, PlayersMaxHealth, 0, 1));
             //check what is out of the screen
             isOfScreen(index, object ,this.player, pos.x, pos.y);
         }
 
         this.collide = function(){
-            var playerLabel= this.player.parts[1].label;        
+            var playerLabel= this.player.label;        
         
             Events.on(engine, 'collisionStart', function(event) {
                 var pairs= event.pairs;
@@ -94,8 +93,8 @@ class Player{
                 for(var i=0; i< Items.length; i++){
                     if(Items[i].body.Pickable){
                         
-                        this.playerX = this.player.parts[1].position.x;
-                        this.playerY = this.player.parts[1].position.y;
+                        this.playerX = this.player.position.x;
+                        this.playerY = this.player.position.y;
                         this.objectY = Items[i].body.position.y;
                         this.objectX = Items[i].body.position.x;
         
@@ -116,7 +115,7 @@ class Player{
 
         this.throwItem = function(){
             if(itemSelected != undefined && inventory.indexOf(itemSelected) != -1){
-                Items.push( new Box(map(Math.random(), 0, 1, this.player.parts[1].position.x  - size * 3, this.player.parts[1].position.x  + size * 3), this.player.parts[1].position.y -size *2, size, {
+                Items.push( new Box(map(Math.random(), 0, 1, this.player.position.x  - size * 5, this.player.position.x  + size * 5), this.player.position.y -size *2, size *2/3, {
                     isStatic: false,
                     label: itemSelected,
                     friction: 0,
@@ -124,20 +123,13 @@ class Player{
                     mass:5,
                     Render: true,
                     Pickable:true,
-                    Color: '#FF1744',
-                    Image:true
+                    Color: data[itemSelected].Color,
+                    Image: data[itemSelected].Image
                 })); 
         
                 inventory.splice(inventory.indexOf(itemSelected), 1);
         
             }
         }
-
-        this.useItem = function(item){
-            //It's much better to make a JSON file with all the properties of all items
-
-            if(item == "4") mine(1, "A");
-        }
-        
     }
 }

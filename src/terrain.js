@@ -40,17 +40,7 @@ function GenerateTerrain(Xsize,startY, endY, stoneDepth,dimensions){
 
             for(var j=0; j<Math.trunc(noise(i *10) * 10) * 2; j++){
 
-                terrain[3].push( new Box(xpos + j*0.01, ypos - dimensions , dimensions, {
-                    isStatic: false,
-                    label:"terrain[3]",
-                    friction: 0,
-                    restitution: 0,
-                    mass:0.001,
-                    Render: true,
-                    Pickable: false,
-                    Color: '#26C6DA',
-                    Image: false
-                })); 
+                terrain[3].push( new Box(xpos + j*0.01, ypos - dimensions , dimensions,  data[4])); 
             }
         }
     }
