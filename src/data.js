@@ -24,7 +24,7 @@ var data ={
             Render: true,
             Pickable: false,
             Color: '#FF8F00',
-            Image: false
+            Image: true
         },
         "3":{   //Stone
             isStatic: true,
